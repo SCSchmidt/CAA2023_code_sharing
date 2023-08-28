@@ -125,38 +125,74 @@ jcaa1$Year <- as.numeric(jcaa1$Year)
 
 ```
 
-### Persistent identifiers
+
+### where is the code published?
+
 
 ```{r}
-#| label: fig-pid
-#| fig-cap: "Use of persistent identifiers for code in JCAA articles"
-#| warning: false
+#| label: check for repos in persistend IDs
+# data bla
 
-library(ggplot2)
+library(dplyr)
+library(stringr)
 
-library(viridis)
+d2 <- d1 |>
+    mutate(repo = case_when(
+   str_detect(available, "zenodo", F) ~ "zenodo",
+   str_detect(available, "OSF", F) ~ "osf",
+   str_detect(available, "jcaa.", F) ~ "supplementary",
+   pid == "n"  ~ NA,
+  TRUE ~ "div"
+  ))
+```
 
-ggplot()+
-  geom_line(data = jcaa1,
+
+```{r}
+#| label: fig-repo
+#| fig-cap: Repositories used for code that give PIDs.
+
+
+ggplot()+  
+    geom_line(data = jcaa1,
             aes(x = Year,
                 y = Frequency))+
-  geom_bar(data = d1, aes(x = year,
-               fill = pid))+
-  xlab("Year of publication")+
-  ylab("Number of publications")+
-  scale_x_continuous(breaks = 2018:2023,
+  geom_bar(data = d2, aes(x = year,
+               fill = repo))+
+    scale_x_continuous(breaks = 2018:2023,
                    labels = c("2018", "2019", "2020", "2021", "2022", "2023 \n(until August)"))+
-  scale_fill_viridis(discrete = TRUE,
-                      name="Persistent identifiers \nfor published code") + 
+  scale_fill_viridis(discrete = T,
+                     name = "Repository",
+                     breaks = c("osf", "supplementary", "zenodo", "div", NA),
+                     labels = c("OSF.io", "JCAA supplementary", "Zenodo.org", "other", "no PID"),
+                     na.value = "lightgrey")+   # I wanted NAs to be grey and to have a label
+  scale_y_continuous(name = "Number of articles",
+    breaks = seq(0,20, 4))+
+   annotate("text", x = 2023, y = 2, label = "grey: no PID", hjust = -5, size = 5)+
   annotate(geom = "text",
-    label = "total number of articles per year\n in JCAA",
-           x = 2021.5,
-           y = 19 )+
-  theme_bw()
+    label = "total number\nof articles per\nyear in JCAA",
+           x = 2022.01,
+           y = 17,
+    hjust = 0,
+    vjust = 0,
+    size = 3)+
+  theme_bw()+
+    theme(text = element_text(size = 20))
 
-ggsave("./figures/PIDs_per_year.jpg", dpi = 300, width = 8, height = 4)
-
+ggsave("./figures/repo_for_pid_per_year_all_b.jpg", dpi = 300, width = 10, height = 4)
+  
 ```
+-> shows consistent preference of zenodo
+
+```{r}
+#| label: check repo vs metadata
+
+d3 <- d2
+
+d3$repo[is.na(d3$repo)] <- "no PID"
+
+table(d3$repo, d3$metadata)
+```
+
 The black line denotes the number of JCAA articles all in all. Added because this has influence on nr of articles in sample.
 Peak at 2020 is probably related to the drop-off because of covid pandemic.
 Seems to be a rise in percentage of use of persistent identifiers (if 2021 is considered an outlier).
@@ -165,23 +201,6 @@ Not sure: When did JCAA implement reproducibility guidelines? From the very star
 
 ### Documentation
 
-```{r}
-#| label: fig-doc
-#| fig-cap: "documentation of software"
-#| warning: false
-
-# documentation
-## comments = ONLY comments, README (may also contain comments) as main info and manuals as extra on top
-d1 |>
-  ggplot()+
-  geom_bar(aes(x = as.numeric(year),
-               fill = documentation))+
-  geom_line(data = jcaa1,
-            aes(x = as.numeric(Year),
-                y = Frequency))+
-  theme_bw()
-
-```
 
 Most of the time a README is the most elaborate description of the code (comments on top).
 
@@ -217,9 +236,11 @@ ggplot()+
            y = 0.5, 
            label="n = 21",
            size = 3)+
-  theme_bw()
+  theme_bw()+
+      theme(text = element_text(size = 20))
 
-ggsave("./figures/doc_length_kind_per_year.jpg", dpi = 300, width = 8, height = 4)
+
+ggsave("./figures/doc_length_kind_per_year.jpg", dpi = 300, width = 10, height = 4)
 
 ```
 
@@ -249,7 +270,10 @@ d1 |>
   geom_line(data = jcaa1,
             aes(x = Year,
                 y = Frequency))+
-  theme_bw()
+  ylab("Number of Articles")+
+  theme_bw()+
+  theme(text = element_text(size = 20))
+
 
 ggsave("./figures/metadata_per_year.jpg", dpi = 300, width = 8, height = 4)
 ```
@@ -260,54 +284,46 @@ Little metadata gets "automatically" assigned in DOI-giving repositories (zenodo
 
 Adding more metadata (such as keywords, etc) is done consciously.
 
-### where is the code published?
 
-
-```{r}
-#| label: check for repos in persistend IDs
-# data bla
-
-library(dplyr)
-library(stringr)
-
-d2 <- d1 |>
-    mutate(repo = case_when(
-   str_detect(available, "zenodo", F) ~ "zenodo",
-   str_detect(available, "OSF", F) ~ "osf",
-   str_detect(available, "jcaa.", F) ~ "supplementary",
-   pid == "n"  ~ NA,
-  TRUE ~ "div"
-  ))
-```
-
-
-```{r}
-#| label: fig-repo
-#| caption: Repositories used for code that give PIDs.
-
-
-ggplot()+  
-  geom_bar(data = d2, aes(x = year,
-               fill = repo))+
-    scale_x_continuous(breaks = 2018:2023,
-                   labels = c("2018", "2019", "2020", "2021", "2022", "2023 \n(until August)"))+
-  ylab("Number of articles")+
-  scale_fill_viridis(discrete = T,
-                     name = "Repository",
-                     breaks = c("osf", "supplementary", "zenodo", "div", NA),
-                     labels = c("OSF.io", "JCAA supplementary", "Zenodo.org", "other", "no PID"),
-                     na.value = "lightgrey")+   # I wanted NAs to be grey and to have a label
-  scale_y_continuous(breaks = seq(0,8, 2))+
-   annotate("text", x = 2023, y = 2, label = "grey: no PID", hjust = -5, size = 3)+
-  theme_bw()
-
-ggsave("./figures/repo_for_pid_per_year.jpg", dpi = 300, width = 10, height = 4)
-  
-```
--> shows consistent preference of zenodo
-
+-> zenodo offers most metadata.
 
 ## analysis excluded from paper
+
+
+### Persistent identifiers
+
+```{r}
+#| label: fig-pid
+#| fig-cap: "Use of persistent identifiers for code in JCAA articles"
+#| warning: false
+
+library(ggplot2)
+
+library(viridis)
+
+ggplot()+
+  geom_line(data = jcaa1,
+            aes(x = Year,
+                y = Frequency))+
+  geom_bar(data = d1, aes(x = year,
+               fill = pid))+
+  xlab("Year of publication")+
+  ylab("Number of publications")+
+  scale_x_continuous(breaks = 2018:2023,
+                   labels = c("2018", "2019", "2020", "2021", "2022", "2023 \n(until August)"))+
+  scale_fill_viridis(discrete = TRUE,
+                      name="Persistent identifiers \nfor published code") + 
+  annotate(geom = "text",
+    label = "total number of articles per year\n in JCAA",
+           x = 2021.5,
+           y = 19 )+
+  theme_bw()
+
+ggsave("./figures/PIDs_per_year.jpg", dpi = 300, width = 8, height = 4)
+
+```
+-> already covered in "where is published"
+
 
 ### "aim" of software
 ```{r}
@@ -430,3 +446,30 @@ d1 |>
 
 ```
 READMEs not restricted to github -> though maybe more extensive there?
+
+
+```{r}
+#| label: fig-doc
+#| fig-cap: "documentation of software"
+#| warning: false
+
+# documentation
+## comments = ONLY comments, README (may also contain comments) as main info and manuals as extra on top
+d1 |>
+  ggplot()+
+  geom_bar(aes(x = as.numeric(year),
+               fill = documentation))+
+  geom_line(data = jcaa1,
+            aes(x = as.numeric(Year),
+                y = Frequency))+
+  theme_bw()
+
+```
+## Github and Zenodo an Metadata
+
+```{r}
+table(d2$gh, d2$repo)
+
+
+```
+
