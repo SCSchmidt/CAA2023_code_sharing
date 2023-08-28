@@ -1,0 +1,366 @@
+---
+title: "CAA2023_code_sharing"
+author: "Sophie C. Schmidt"
+date: "2023-08-22"
+format: 
+  html:
+    fig-width: 10
+    fig-height: 4
+    code-fold: true
+format: 
+  docx:
+    fig-width: 10
+    fig-height: 4
+---
+
+## Analysis of JCAA articles regarding code sharing
+
+```{r}
+# open archaeo data loading
+
+library(here)
+path <- here("data", "open-archaeo-data", "oarch.RData" )
+
+load(path)
+
+library(dplyr)
+
+oarch3 <- oarch |>
+  mutate(
+    pub = case_when(
+    !is.na(publication) ~ "publication",
+    !is.na(website) ~ "website",
+    !is.na(blogpost) ~ "blogpost",
+    !is.na(github) ~ "github",
+    !is.na(gitlab) ~ "gitlab",
+    !is.na(bitbucket) ~ "bitbucket",
+    !is.na(gist) ~ "gist",
+    !is.na(codeberg) ~ "codeberg"),
+    advertisement = case_when(
+      pub == "publication" ~ "yes",
+      pub == "website" ~ "yes",
+      pub == "blogpost" ~ "yes"))
+
+pubs <- colnames(oarch[,3:16])
+
+library(tidyr)
+
+oarch5 <- oarch3 %>% pivot_longer(cols=colnames(oarch[,3:16]),
+                                  names_to='publication',
+                                  values_to='pub_form')
+
+oarch5 <- oarch5 |>
+  filter(!is.na(pub_form))
+
+```
+
+
+
+### Analysis of Open Archaeo data
+
+```{r}
+#| label: fig-oadistribution
+#| fig-cap: "ways  of distributing software listed on open-archaeo.info. Red - software that is linked to a paper, website or blog, indicating some advertisement of the software product"
+#| warning: false
+
+library(ggplot2)
+library(forcats)
+
+
+oarch5 %>%
+  ggplot(aes(x = fct_infreq(publication), fill = advertisement))+
+  geom_bar()+
+  guides(fill = "none") +
+ # scale_x_discrete(name="Publication",
+  #                 labels=c("Github", "Website", "Paper", "Codeberg", "Blogpost", "Gist", "Gitlab", "Bitbucket",  "Other"))+
+  labs(title = "How is the software distributed?",
+       caption = "Data: open-archaeo.info (double mentions)",
+       x = NULL, y = NULL)+
+  theme_minimal()+
+  theme(text = element_text(size = 20)) +
+  coord_flip()
+```
+
+
+
+### Analysis of JCAA articles and code sharing
+
+```{r}
+# load data of JCAA table
+
+path <- here("data", "articles_code_JCAA_2018-2023.ods" )
+
+d <- readODS::read_ods(path = path)
+
+
+library(dplyr)
+library(tidyr)
+library(stringr)
+
+
+d1 <- d |>
+  mutate(a = case_when(
+    str_detect(available, "https|printed", F) ~ "yes",
+    TRUE ~ "no"
+  )) |>
+  filter(a == "yes",
+         str_detect(Code, "no", T))
+
+
+## load general JCAA data
+
+path <- here( "data", "JCAA_all_papers_per_year.ods" )
+
+JCAA <- readODS::read_ods(path = path)
+
+jcaa1 <- JCAA |>
+  group_by(Year) |>
+  summarise(Frequency = sum(n))
+
+jcaa1$Year[jcaa1$Year == "2023 (until August)"] <- "2023"
+jcaa1$Year <- as.numeric(jcaa1$Year)  
+
+
+```
+
+### Persistent identifiers
+
+```{r}
+#| label: fig-pid
+#| fig-cap: "Use of persistent identifiers for code in JCAA articles"
+#| warning: false
+
+library(ggplot2)
+
+library(viridis)
+
+ggplot()+
+  geom_line(data = jcaa1,
+            aes(x = Year,
+                y = Frequency))+
+  geom_bar(data = d1, aes(x = year,
+               fill = pid))+
+  xlab("Year of publication")+
+  ylab("Number of publications")+
+  scale_x_continuous(breaks = 2018:2023,
+                   labels = c("2018", "2019", "2020", "2021", "2022", "2023 \n(until August)"))+
+  scale_fill_viridis(discrete = TRUE,
+                      name="Persistent identifiers \nfor published code") + 
+  annotate(geom = "text",
+    label = "total number of articles per year\n in JCAA",
+           x = 2021.5,
+           y = 19 )+
+  theme_bw()
+
+ggsave("./figures/PIDs_per_year.jpg", dpi = 300, width = 8, height = 4)
+
+```
+The black line denotes the number of JCAA articles all in all.
+Peak at 2020 is probably related to the drop-off because of covid pandemic.
+Seems to be a rise in percentage of use of persistent identifiers
+
+### "aim" of software
+```{r}
+#| label: fig-aims
+#| fig-cap: "Aim of the software over time"
+#| warning: false
+
+d1 |>
+  ggplot()+
+  geom_bar(aes(x = year,
+               fill = aim))+
+  geom_line(data = jcaa1,
+            aes(x = Year,
+                y = Frequency))+
+    scale_x_continuous(breaks = 2018:2023,
+                   labels = c("2018", "2019", "2020", "2021", "2022", "2023 \n(until August)"))+
+  scale_fill_viridis(discrete = TRUE,
+                     name = "Reason of publishing the code")+
+    annotate(geom = "text",
+    label = "total number of articles per year\n in JCAA",
+           x = 2022,
+           y = 19 )+
+  theme_bw()
+
+ggsave("./figures/aims_per_year.jpg", dpi = 300, width = 8, height = 4)
+
+
+```
+Seems to be a more or less consistent percentage of research software development in relation to article reproducibility
+1 NA is due to DOI not resolving anymore. 
+Maybe a bit difficult to assign aims the authors may have intended. 
+
+### Kind of software
+
+```{r}
+#| label: fig-as
+#| fig-cap: "Format of software"
+#| warning: false
+
+d1 |>
+  ggplot()+
+  geom_bar(aes(x = as.numeric(year),
+               fill = as))+
+  geom_line(data = jcaa1,
+            aes(x = as.numeric(Year),
+                y = Frequency))+
+  theme_bw()
+```
+Most are compendiums and scripts, more rarely complete packages (extensions of software) or stand-alone software.
+
+
+### Documentation
+
+```{r}
+#| label: fig-doc
+#| fig-cap: "documentation of software"
+#| warning: false
+
+# documentation
+## comments = ONLY comments, README (may also contain comments) as main info and manuals as extra on top
+d1 |>
+  ggplot()+
+  geom_bar(aes(x = as.numeric(year),
+               fill = documentation))+
+  geom_line(data = jcaa1,
+            aes(x = as.numeric(Year),
+                y = Frequency))+
+  theme_bw()
+
+```
+Most of the time a README is the most elaborate description of the code (comments on top)
+
+```{r}
+#| label: fig-doclength
+#| fig-cap: "documentation of software, length and year"
+#| warning: false
+ 
+d1$doc_length <- factor(d1$doc_length, ordered = T,
+                        levels = c("little", "some", "good"))
+d1$documentation <- factor(d1$documentation, ordered = T,
+                           levels = c("none", "comments", "README", "manuals"))
+
+d1 |>
+ggplot()+
+  geom_jitter(aes(x = year,
+                 y = doc_length,
+                 col = documentation,
+                 shape = as),
+              width = 0.2, 
+              height = 0.2,
+              alpha = 0.9,
+              size = 2.5)+
+  labs(y = "length of documentation")+
+    scale_colour_viridis(discrete = TRUE)+
+   annotate(geom="text",
+           x = 2019, 
+           y = 4.5, 
+           label="points jittered by 20% to reduce overlap",
+           size = 3)+
+     annotate(geom="text",
+           x = 2023, 
+           y = 0.5, 
+           label="n = 21",
+           size = 3)+
+  theme_bw()
+
+ggsave("./figures/doc_length_kind_per_year.jpg", dpi = 300, width = 8, height = 4)
+
+```
+Length of documentation seems to get better -> mostly READMEs or Manuals -> sign of more github use?
+
+
+#### Github and PIDs
+```{r}
+#| label: fig-gh
+#| fig-cap: "documentation of software, length and year"
+#| warning: false
+ 
+d1$doc_length <- factor(d1$doc_length, ordered = T,
+                        levels = c("little", "some", "good"))
+d1 |>
+ggplot()+
+  geom_jitter(aes(x = year,
+                 y = doc_length,
+                 col = gh,
+                 shape = pid),
+              width = 0.2, 
+              height = 0.2,
+              alpha = 0.9)+
+  labs(y = "length of documentation")+
+   annotate(geom="text",
+           x = 2019, 
+           y = 4.5, 
+           label="points jittered by 20% to reduce overlap",
+           size = 3)+
+       annotate(geom="text",
+           x = 2023, 
+           y = 0.5, 
+           label="n = 21",
+           size = 3)+
+  theme_bw()
+
+```
+
+Vllt eher gucken, ob gh+PID nur GH oder nur PID
+```{r}
+d1 |>
+  mutate(v = 
+           case_when(
+    (gh == "y") & (pid == "y") ~ "gh and pid",
+    (gh == "y") & (pid == "n") ~ "gh",
+    (gh == "n") & (pid == "y") ~ "pid",
+     is.na(gh) & (pid == "y") ~ "pid"
+  )) |>
+  ggplot()+
+  geom_jitter(aes(x = year,
+                 y = doc_length,
+                 col = v,
+                 shape = documentation),
+              width = 0.2, 
+              height = 0.2,
+              alpha = 0.9)+
+  labs(y = "length of documentation")+
+   annotate(geom="text",
+           x = 2019, 
+           y = 4.5, 
+           label="points jittered by 20% to reduce overlap",
+           size = 3)+
+       annotate(geom="text",
+           x = 2023, 
+           y = 0.5, 
+           label="n = 21",
+           size = 3)+
+  theme_bw()
+
+
+```
+READMEs auch bei nicht github -> aber da häufig länger?
+
+### Metadata
+
+```{r}
+
+#| label: fig-metadata
+#| fig-cap: "metadata of software"
+#| warning: false
+## metadata: ordered factor
+
+d1$metadata <- factor(d1$metadata, ordered = T,
+                      levels = c("no", "little", "some", "plenty"))
+
+d1 |>
+  ggplot()+
+  geom_bar(aes(x = year,
+               fill = metadata))+
+  scale_x_continuous(breaks = 2018:2023,
+                   labels = c("2018", "2019", "2020", "2021", "2022", "2023 \n(until August)"))+
+  scale_fill_viridis(discrete = T)+
+  geom_line(data = jcaa1,
+            aes(x = Year,
+                y = Frequency))+
+  theme_bw()
+
+ggsave("./figures/metadata_per_year.jpg", dpi = 300, width = 8, height = 4)
+```
+metadata more and more important.
