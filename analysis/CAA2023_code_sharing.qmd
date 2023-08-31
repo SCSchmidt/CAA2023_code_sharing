@@ -12,7 +12,7 @@ format:
 #    fig-height: 4
 ---
 
-## Analysis of JCAA articles regarding code sharing
+## Open Archaeo
 
 ```{r}
 #| label: open archaeo data loading
@@ -64,7 +64,7 @@ oarch5 <- oarch5 |>
 
 
 
-### Analysis of Open Archaeo data
+### Open archaeo: "Advertisement"
 
 ```{r}
 #| label: fig-oadistribution
@@ -72,7 +72,7 @@ oarch5 <- oarch5 |>
 #| warning: false
 
 library(ggplot2)
-library(forcats) #for fct_inreq
+library(forcats) #for fct_infreq which oders the bars in the barplot
 
 
 oarch5 %>%
@@ -80,7 +80,7 @@ oarch5 %>%
   geom_bar()+
   guides(fill = "none") +
   scale_x_discrete(breaks = c("github", "website", "publication", "codeberg", "blogpost", "gist", "gitlab", "bitbucket", "DOI", "twitter", "youtube", "launchpad", "pypi", "cran"),
-    labels=c("Github", "Website", "Paper", "Codeberg", "Blogpost", "Gist", "Gitlab", "Bitbucket",  "Repositiry wtih DOI", "Twitter", "YouTube", "Launchpad", "PyPI", "CRAN"))+
+    labels=c("Github", "Website", "Scientific Publication", "Codeberg", "Blogpost", "Gist", "Gitlab", "Bitbucket",  "Repository with PID", "Twitter", "YouTube", "Launchpad", "PyPI", "CRAN"))+
   labs(title = "Correlation of distribution platform and advertisement",
        caption = "Data: open-archaeo.info (double mentions)",
        x = NULL, y = NULL)+
@@ -88,40 +88,12 @@ oarch5 %>%
   theme(text = element_text(size = 20)) +
   coord_flip()
 
-ggsave("./figures/oarch_dist_new.jpg", dpi = 300, width = 250, height = 125, units = "mm")
+ggsave("./figures/oarch_dist_new.jpg", dpi = 300, width = 275, height = 125, units = "mm")
 
 ```
 
-```{r}
-#| label: see how github and zenodo connect here
-#| echo: false
-#| eval: false
 
-oarch6 <- oarch |>
-  mutate(pid = case_when(
-    !is.na(DOI) ~ "y",
-    TRUE ~ "n"
-  ),
-  gh = case_when(
-      !is.na(github) ~ "y",
-    TRUE ~ "n"  
-  ))
-
-table(oarch6$gh, oarch6$pid)
-
-
-
-oarch_zenodo <- oarch |>
-  filter(!is.na(github)) |>
-  mutate(zenodo = case_when(
-    str_detect(DOI, "zenodo") ~ "y",
-    TRUE ~ "n"
-  )) 
-
-
-
-
-```
+### Open archaeo: Distribution of software and publication
 
 ```{r}
 #| label: see how kind of software correlates with publication
@@ -182,7 +154,7 @@ ggsave("./figures/oarch_software_distribution_new.jpg", dpi = 300, width = 14, h
 
 
 
-### Analysis of JCAA articles and code sharing
+## Analysis of JCAA articles and code sharing
 
 ```{r}
 #| label: load data of JCAA table
@@ -224,7 +196,7 @@ jcaa1$Year <- as.numeric(jcaa1$Year)
 ```
 
 
-### where is the code published?
+### Repositories and Persistend IDs
 
 
 ```{r}
@@ -299,9 +271,7 @@ Seems to be a rise in percentage of use of persistent identifiers (if 2021 is co
 Not sure: When did JCAA implement reproducibility guidelines? From the very start?
 
 ### Documentation
-
-
-Most of the time a README is the most elaborate description of the code (comments on top).
+Most of the time a README is the most elaborate description of the code (comments + README).
 
 ```{r}
 #| label: fig-doclength
@@ -310,36 +280,44 @@ Most of the time a README is the most elaborate description of the code (comment
  
 d1$doc_length <- factor(d1$doc_length, ordered = T,
                         levels = c("little", "some", "good"))
+
 d1$documentation <- factor(d1$documentation, ordered = T,
                            levels = c("none", "comments", "README", "manuals"))
 
 d1 |>
+  filter(!is.na(documentation))|>
 ggplot()+
   geom_jitter(aes(x = year,
                  y = doc_length,
-                 col = documentation,
-                 shape = as),
+                 shape = as,
+                 col = documentation),
               width = 0.2, 
               height = 0.2,
               alpha = 0.9,
-              size = 2.5)+
-  labs(y = "length of documentation")+
-    scale_colour_viridis(discrete = TRUE)+
+              size = 2.5,
+              na.rm = TRUE)+
+  labs(title = "Code organisation and documentation",
+       y = "Length of documentation",
+       x = "Year of publication")+
+    scale_colour_viridis(discrete = TRUE,
+                         name = "Documentation:")+
+  scale_shape_discrete(name = "Code as:")+
    annotate(geom="text",
-           x = 2019, 
-           y = 4.5, 
-           label="points jittered by 20% to reduce overlap",
-           size = 3)+
+           x = 2018, 
+           y = 3.5, 
+           label="Points jittered by 20% to reduce overlap",
+           size = 4,
+           hjust = 0)+
      annotate(geom="text",
            x = 2023, 
            y = 0.5, 
-           label="n = 21",
-           size = 3)+
+           label=paste0("n = ", nrow(d1 |>  filter(!is.na(documentation))) ),
+           size = 4)+
   theme_bw()+
       theme(text = element_text(size = 20))
 
 
-ggsave("./figures/doc_length_kind_per_year.jpg", dpi = 300, width = 10, height = 4)
+ggsave("./figures/doc_length_kind_per_year_narm2.jpg", dpi = 300, width = 10, height = 4)
 
 ```
 
@@ -365,16 +343,26 @@ d1 |>
                fill = metadata))+
   scale_x_continuous(breaks = 2018:2023,
                    labels = c("2018", "2019", "2020", "2021", "2022", "2023 \n(until August)"))+
-  scale_fill_viridis(discrete = T)+
+  scale_fill_viridis(name = "Metadata",
+                     discrete = T,
+                     na.value = "lightgrey")+
   geom_line(data = jcaa1,
             aes(x = Year,
                 y = Frequency))+
-  ylab("Number of Articles")+
+  labs(title = "Metadata availability",
+       y = "Number of Articles")+
   theme_bw()+
+  annotate(geom = "text",
+    label = "total number\nof articles per\nyear in JCAA",
+           x = 2022.3,
+           y = 15.5,
+    hjust = 0,
+    vjust = 0,
+    size = 4)+
   theme(text = element_text(size = 20))
 
 
-ggsave("./figures/metadata_per_year.jpg", dpi = 300, width = 8, height = 4)
+ggsave("./figures/metadata_per_year2.jpg", dpi = 300, width = 8, height = 4)
 ```
 
 Importance of metadata seems to grow.
@@ -387,7 +375,6 @@ Adding more metadata (such as keywords, etc) is done consciously.
 -> zenodo offers most metadata.
 
 ## analysis excluded from paper
-
 
 ### Persistent identifiers
 
@@ -564,11 +551,39 @@ d1 |>
   theme_bw()
 
 ```
-## Github and Zenodo an Metadata
+### Github and Zenodo and Metadata
 
 ```{r}
+#| label: GH_zenodo_JCAA
 table(d2$gh, d2$repo)
+```
 
+```{r}
+
+#| label: GH_zenodo_oarch
+#| echo: false
+#| eval: false
+
+oarch6 <- oarch |>
+  mutate(pid = case_when(
+    !is.na(DOI) ~ "y",
+    TRUE ~ "n"
+  ),
+  gh = case_when(
+      !is.na(github) ~ "y",
+    TRUE ~ "n"  
+  ))
+
+table(oarch6$gh, oarch6$pid)
+
+
+
+oarch_zenodo <- oarch |>
+  filter(!is.na(github)) |>
+  mutate(zenodo = case_when(
+    str_detect(DOI, "zenodo") ~ "y",
+    TRUE ~ "n"
+  )) 
 
 ```
 
