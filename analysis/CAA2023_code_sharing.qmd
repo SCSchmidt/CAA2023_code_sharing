@@ -29,6 +29,8 @@ load(path)
 
 library(dplyr)
 
+# restructure to get one column with info where the code is linked to
+
 oarch3 <- oarch |>
   mutate(
     pub = case_when(
@@ -49,6 +51,7 @@ pubs <- colnames(oarch[,3:16])
 
 library(tidyr)
 
+#pivot table long
 oarch5 <- oarch3 %>% pivot_longer(cols=colnames(oarch[,3:16]),
                                   names_to='publication',
                                   values_to='pub_form')
@@ -98,6 +101,7 @@ ggsave("./figures/oarch_dist_new.jpg", dpi = 300, width = 275, height = 125, uni
 
 library(viridis)
 
+# some summarizing:
 oarch4 <- oarch5 |>
   mutate(publication = case_when (
          publication == "bitbucket" ~ "other",
@@ -166,7 +170,7 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-
+# find only those with code available
 d1 <- d |>
   mutate(a = case_when(
     str_detect(available, "https|printed", F) ~ "yes",
@@ -176,7 +180,7 @@ d1 <- d |>
          str_detect(Code, "no", T))
 
 
-## load general JCAA data
+## load general JCAA data for comparison
 
 path <- here("analysis", "data", "JCAA_all_papers_per_year.ods" )
 
@@ -198,7 +202,7 @@ jcaa1$Year <- as.numeric(jcaa1$Year)
 
 ```{r}
 #| label: check for repos in persistend IDs
-# data bla
+# data manipulation
 
 library(dplyr)
 library(stringr)
@@ -251,6 +255,10 @@ ggsave("./figures/repo_for_pid_per_year_all_b.jpg", dpi = 300, width = 10, heigh
 ```
 -> shows consistent preference of zenodo
 
+The black line denotes the number of JCAA articles all in all. Added because this has influence on nr of articles in sample.
+Peak at 2020 is probably related to the drop-off because of covid pandemic.
+Seems to be a rise in percentage of use of persistent identifiers (if 2021 is considered an outlier).
+
 ```{r}
 #| label: tbl-repo_metadata
 #| tbl-cap: "Metadata and Repository"
@@ -262,9 +270,7 @@ d3$repo[is.na(d3$repo)] <- "no PID"
 kable(table(d3$repo, d3$metadata))
 ```
 
-The black line denotes the number of JCAA articles all in all. Added because this has influence on nr of articles in sample.
-Peak at 2020 is probably related to the drop-off because of covid pandemic.
-Seems to be a rise in percentage of use of persistent identifiers (if 2021 is considered an outlier).
+Table shows: Zenodo is linked to most metadata (maybe only indirectly via GH)
 
 Not sure: When did JCAA implement reproducibility guidelines? From the very start?
 
