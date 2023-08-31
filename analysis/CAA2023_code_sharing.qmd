@@ -18,7 +18,7 @@ format:
 #| label: open archaeo data loading
 #| warning: FALSE
 
-
+library(knitr)
 library(here)
 path <- here("analysis" ,"data", "open-archaeo-data", "oarch.RData" )
 load(path)
@@ -28,10 +28,6 @@ path <- here("analysis" ,"data", "open-archaeo-data", "caa2021_oarch.RData" )
 load(path)
 
 library(dplyr)
-
-oarch |>
-  filter(!is.na(pypi) ) |>
-  nrow()
 
 oarch3 <- oarch |>
   mutate(
@@ -97,6 +93,7 @@ ggsave("./figures/oarch_dist_new.jpg", dpi = 300, width = 275, height = 125, uni
 
 ```{r}
 #| label: see how kind of software correlates with publication
+#| warning: false
 
 
 library(viridis)
@@ -255,13 +252,14 @@ ggsave("./figures/repo_for_pid_per_year_all_b.jpg", dpi = 300, width = 10, heigh
 -> shows consistent preference of zenodo
 
 ```{r}
-#| label: check repo vs metadata
+#| label: tbl-repo_metadata
+#| tbl-cap: "Metadata and Repository"
 
 d3 <- d2
 
 d3$repo[is.na(d3$repo)] <- "no PID"
 
-table(d3$repo, d3$metadata)
+kable(table(d3$repo, d3$metadata))
 ```
 
 The black line denotes the number of JCAA articles all in all. Added because this has influence on nr of articles in sample.
