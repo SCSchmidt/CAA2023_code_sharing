@@ -159,10 +159,9 @@ ggsave("./figures/oarch_software_distribution_new.jpg", dpi = 300, width = 14, h
 #| label: load data of JCAA table
 #| warning: FALSE 
 
-path <- here("analysis", "data", "articles_code_JCAA_2018-2023.ods" )
+path <- here("analysis", "data", "articles_code_JCAA_2018-2023.csv" )
 
-d <- readODS::read_ods(path = path)
-
+d <- read.csv2(path, sep = ";")
 
 library(dplyr)
 library(tidyr)
@@ -180,10 +179,10 @@ d1 <- d |>
 
 ## load general JCAA data for comparison
 
-path <- here("analysis", "data", "JCAA_all_papers_per_year.ods" )
+path <- here("analysis", "data", "JCAA_all_papers_per_year.csv" )
 
-JCAA <- readODS::read_ods(path = path)
-
+JCAA <- read.csv2(path, sep = ";")
+  
 jcaa1 <- JCAA |>
   group_by(Year) |>
   summarise(Frequency = sum(n))

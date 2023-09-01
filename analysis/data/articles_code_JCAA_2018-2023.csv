@@ -1,0 +1,138 @@
+Authors;Title;type;Link;Code;available;as;aim;documentation;doc_length;year;source;gh;pid;print;Links_2023-08-22;license;metadata
+"Ceri Binding,
+Douglas Tudhope";Automatic Normalization of Temporal Expressions;Research Article;https://doi.org/10.5334/jcaa.105;Python;https://github.com/cbinding/yearspans;compendium;research software;README;good;2023;journal website;y;n;;y;MIT;plenty
+Petr Pajdla;Spatial Patterns and Grave Goods Differences at the Cemetery of Vedrovice (Czech Republic): A Resampling Approach to Identity Markers in the Early Neolithic;Case Study;https://doi.org/10.5334/jcaa.85;R code;https://doi.org/10.5281/zenodo.4899652;compendium;article reproducibility;README;good;2023;journal website;y;y;;y;MIT;some
+Kalliopi Efkleidou et al;Smart Eye: An Application for In Situ Accessibility to “Invisible” Heritage Sites;Case Study;https://doi.org/10.5334/jcaa.100;no;no;;;;;2022;journal website;;;;;;
+"Eduardo Herrera Malatesta ,
+Jorge Ulloa Hung,
+Corinne L. Hofman";Looking at the Big Picture: Using Spatial Statistical Analyses to Study Indigenous Settlement Patterns in the North-Western Dominican Republic;Research Article;https://doi.org/10.5334/jcaa.83;R code;https://doi.org/10.17605/OSF.IO/WUBA7 ;script;article reproducibility;README;little;2023;journal website;n;y;;y;no;some
+"Shawn Ross,
+Brian Ballsun-Stanton ,
+Steve Cassidy,
+Penny Crook,
+Jens Klump,
+Adela Sobotkova";FAIRer Data through Digital Recording: The FAIMS Mobile Experience;Research Article;https://doi.org/10.5334/jcaa.96;Java;https://github.com/FAIMS/trap-gridded-survey/releases/tag/v1.1;compendium;research software;README;good;2022;journal website;y;n;;y;CC BY 4.0;some
+"Andrea Jalandoni ,
+Maria Kottermair,
+Boyd Dixon,
+Victor Hara Torres";Effectiveness of 2020 Airborne Lidar for Identifying Archaeological Sites and Features on Guåhan (Guam);Case Study; https://doi.org/10.5334/jcaa.101;no, closed source programs used;no;;;;;2022;journal website;;;;;;
+Thomas Keep;The Mernda VR Project: The Creation of a VR Reconstruction of an Australian Heritage Site;Case Study;https://doi.org/10.5334/jcaa.91;no;No, Blender data: 3D Vista files. Figshare. DOI: https://doi.org/10.26188/21259374  ;;;;;2022;journal website;;;;;;
+Katherine Thomas;Exploratory GIS: Modelling Past Land Use and Occupancy with Functional Connectivity, Willandra Lakes Region World Heritage Area, NSW, Australia;Research Article ;https://doi.org/10.5334/jcaa.98;no;no;;;;;2022;journal website;;;;;;
+Mikkel Nørtoft;A New Framework for Quantifying Prehistoric Grave Wealth;Case Study;https://doi.org/10.5334/jcaa.86;R code;https://doi.org/10.5281/zenodo.6992672 ,https://github.com/mnortoft/QuantWealth;compendium;article reproducibility;README;good;2022;journal website;y;y;;y;CC BY 4.0;plenty
+Phyllis S. Johnson;Examining Gender Disparities in Computational Archaeology Publications: A Case Study in the Journal of Computational Applications in Archaeology and the Computer Applications and Quantitative Methods in Archaeology Conference Proceedings;Case Study;https://doi.org/10.5334/jcaa.84;no;no;;;;;2022;journal website;;;;;;
+Stacey Middleton , Rebecca Phillipps;Experimental Improvements to the Volume Ratio and Quantifying Movement Using Stone Artefact Analysis;Research Article;https://doi.org/10.5334/jcaa.93;no;no;;;;;2022;journal website;;;;;;
+Stef Boogers , Dries Daems;SAGAscape: Simulating Resource Exploitation Strategies in Iron Age to Hellenistic Communities in Southwest Anatolia;Research Article;https://doi.org/10.5334/jcaa.90;Netlogo, R; https://doi.org/10.48804/H3PSC6;script;article reproducibility;README;good;2022;journal website;;y;;y;CC BY 4.0;plenty
+"Daniël van Helden,
+Evgeny Mirkes,
+Ivan Tyukin,
+Penelope Allison";The Arch-I-Scan Project: Artificial Intelligence and 3D Simulation for Developing New Approaches to Roman Foodways;Research Article ;https://doi.org/10.5334/jcaa.92;?;no;;;;;2022;journal website;;;;;;
+"Gala Morris ,
+Joshua Emmitt,
+Jeremy Armstrong";Depth and Dimension: Exploring the Problems and Potential of Photogrammetric Models for Ancient Coins;Research Article ; https://doi.org/10.5334/jcaa.99;no, closed source programs used;https://www.doi.org/10.17608/k6.auckland.19790689;;;;;2022;journal website;;y;;n;;
+"Woo Jin Shim,
+Ilhong Ko ,
+Soo Jin Park";‘Benefit Maximizing Routes’: Development and Evaluation Using the Historical Roads of Korea’s Joseon Dynasty (1392–1910);Research Article ;https://doi.org/10.5334/jcaa.97;?;no;;;;;2022;journal website;;;;;;
+"James Frances Loftus III ,
+Noriko Seguchi";Visualizing Variability in Ceramic Micro-Curvature though Novel 3D Morphometric Mapping and Sliced Segmental Extraction;Research Article ;https://doi.org/10.5334/jcaa.89;no;no;;;;;2022;journal website;;;;;;
+"Fiona Carroll ,
+Edward Carroll";Budget Travel in the Mediterranean: A Methodology for Reconstructing Ancient Journeys through Least Cost Networks;Research Article ;https://doi.org/10.5334/jcaa.88;Python, Fortran;no;;;;;2022;journal website;;;;;;
+"Armelle Couillet ,
+Hélène Rougier,
+Dominique Todisco,
+Josserand Marot,
+Olivier Gillet,
+Isabelle Crevecoeur";New Visual Analytics Tool and Spatial Statistics to Explore Archeological Data: The Case of the Paleolithic Sequence of La Roche-à-Pierrot, Saint-Césaire, France;Research Article ;https://doi.org/10.5334/jcaa.81;no;no;;;;;2022;journal website;;;;;;
+Kris Lockyear;Simulation, Seriation and the Dating of Roman Republican Coins;Research Article;https://doi.org/10.5334/jcaa.57 ;R code;The program code is available at DOI https://www.doi.org/10.5522/04/12076530  and the data sets at DOI https://www.doi.org/10.5522/04/12074604   (both links fail);;;;;2022;journal website;;y;;n;;
+"Lewis Borck ,
+Jan C. Athenstädt,
+Lee Ann Cheromiah,
+Leslie D. Aragon,
+Ulrik Brandes,
+Corinne L. Hofman";Plainware and Polychrome: Quantifying Perceptual Differences in Ceramic Classification Between Diverse Groups to Further a Strong Objectivity;Research Article;https://doi.org/10.5334/jcaa.37;R Code;https://doi.org/10.5334/jcaa.37.s2 ;script;article reproducibility;comments;little;2020;journal website;;y;;y;no;no
+"Molly Carney ,
+Benjamin Davies";Agent-Based Modeling, Scientific Reproducibility, and Taphonomy: A Successful Model. Implementation Case Study;Research Article;https://doi.org/10.5334/jcaa.52;Netlogo, R Code;https://doi.org/10.5281/zenodo.3761900;script;article reproducibility;README;good;2020;journal website;y;y;;y;no;some
+Martin Hinz;Sensitivity of Radiocarbon Sum Calibration;Case Study;https://doi.org/10.5334/jcaa.53 ;R Code;https://www.doi.org/10.5281/zenodo.3613674 ;package;article reproducibility;manuals;good;2020;journal website;y;y;;y;MIT;plenty
+"Damien Huffer,
+Shawn Graham";Fleshing Out the Bones: Studying the Human Remains Trade with Tensorflow and Inception;Case Study;https://doi.org/10.5334/jcaa.8;R Code;https://doi.org/10.17605/OSF.IO/9CFJA;script;article reproducibility;comments;good;2018;journal website;;y;;y;partly CC-BY-NC 4.0 ;little
+"Keith W. Kintigh ,
+Matthew A. Peeples";Estimating Population Growth Rates and Instantaneous Population from Periodized Settlement Data;Research Article;https://doi.org/10.5334/jcaa.58;Delphi, R;https://github.com/kintigh/RoomAccum;programme, script;research software;manuals;good;2020;journal website;y;n;;y;CC BY 3.0;little
+Sophie C. Schmidt, Ben Marwick;Tool-Driven Revolutions in Archaeological Science;Research Article;https://doi.org/10.5334/jcaa.29;R Code;https://www.doi.org/10.17605/OSF.IO/RHVN5 ;compendium;article reproducibility;comments;little;2020;journal website;y;y;;y;MIT, CC BY 4.0;some
+Ronald M. Visser;Dendrochronological Provenance Patterns. Network Analysis of Tree-Ring Material Reveals Spatial and Economic Relations of Roman Timber in the Continental North-Western Provinces;Research Article; https://doi.org/10.5334/jcaa.79 ;R Code;https://github.com/RonaldVisser/ProvenanceNetworks/ , https://zenodo.org/badge/DOI/10.5281/zenodo.7157744.svg doi.org;compendium;article reproducibility;README;some;2021;journal website;y;y;;y;GPL-3.0;some
+Simon Wyatt-Spratt;After the Revolution: A Review of 3D Modelling as a Tool for Stone Artefact Analysis;Review;https://doi.org/10.5334/jcaa.103 ;R Code;https://doi.org/10.5281/zenodo.7037023;compendium;article reproducibility;README;some;2022;journal website;;y;;y;CC0 1.0, CC-BY-4.0;some
+Hassan El Hajj;Interferometric SAR and Machine Learning: Using Open Source Data to Detect Archaeological Looting and Destruction;Research Article;https://doi.org/10.5334/jcaa.70;?;no;;;;;2021;journal website;;;;;;
+"Louis Manière,
+Maël Crépy,
+Bérangère Redon";Building a Model to Reconstruct the Hellenistic and Roman Road Networks of the Eastern Desert of Egypt, a Semi-Empirical Approach Based on Modern Travelers’ Itineraries;Research Article;https://doi.org/10.5334/jcaa.67;no, closed source programs used;no;;;;;2021;journal website;;;;;;
+Isak Roalkvam;Algorithmic Classification and Statistical Modelling of Coastal Settlement Patterns in Mesolithic South-Eastern Norway;Research Article;https://doi.org/10.5334/jcaa.60;Python, R Code; https://doi.org/10.5281/zenodo.3948020 , https://github.com/isakro/meso_patterns;compendium;article reproducibility;README;good;2020;journal website;y;y;;y;MIT, NLOD 2.0, CC BY-NC;some
+M. Simon Maddison, Sophie C. Schmidt;Percolation Analysis – Archaeological Applications at Widely Different Spatial Scales;Case Study;https://doi.org/10.5334/jcaa.54;R Code;https://www.doi.org/10.17605/OSF.IO/7EXTC , https://github.com/SCSchmidt/percopackage;package;research software;manuals;good;2020;journal website;y;y;;y;MIT;some
+"Shawn Graham,
+Alex Lane,
+Damien Huffer,
+Andreas Angourakis";Towards a Method for Discerning Sources of Supply within the Human Remains Trade via Patterns of Visual Dissimilarity and Computer Vision;Research Article;https://doi.org/10.5334/jcaa.59;Python, R Code;https://www.github.com/bonetrade/visual-dissimilarity , DOI: https://doi.org/10.5334/jcaa.59.s1;compendium;article reproducibility;README;some;2020;journal website;y;y;;y;no;little
+Athos Agapiou;Detecting Looting Activity through Earth Observation Multi-Temporal Analysis over the Archaeological Site of Apamea (Syria) during 2011–2012;Research Article;https://doi.org/10.5334/jcaa.56;no, closed source programs used;no;;;;;2020;journal website;;;;;;
+"Michael Doneus,
+Gottfried Mandlburger,
+Nives Doneus";Archaeological Ground Point Filtering of Airborne Laser Scan Derived Point-Clouds in a Difficult Mediterranean Environment;Research Article;https://doi.org/10.5334/jcaa.44;no, closed source programs used;no;;;;;2020;journal website;;;;;;
+"Eythan Levy, Eli Piasetzky,
+Israel Finkelstein";Strata, Scarabs and Synchronisms: A Framework for Synchronizing Strata and Artifacts;Research Article;https://doi.org/10.5334/jcaa.41;Python;https://github.com/Eythan31/TPQ-Composer;programme, script;research software;README;little;2020;journal website;y;n;;y;GPL-3.0;little
+"Martin Olivier,
+Wouter Verschoof-van der Vaart";Implementing State-of-the-Art Deep Learning Approaches for Archaeological Object Detection in Remotely-Sensed Data: The Results of Cross-Domain Collaboration;Research Article;https://doi.org/10.5334/jcaa.78;Python, yolo scripts;https://github.com/epsln/YOLOv4LiDAR;compendium;article reproducibility;README;good;2021;journal website;y;n;;y;no;little
+Andrew White;Lithic Transport Patterns, Tool Curation Behavior, and Group Range Estimates: A Model-Based Exploration;Research Article;https://doi.org/10.5334/jcaa.82;Java, Repast;no;;;;;2021;journal website;;;;;;
+Mike Lyons;Ceramic Fabric Classification of Petrographic Thin Sections with Deep Learning;Research Article;https://doi.org/10.5334/jcaa.75;TensorFlow;no;;;;;2021;journal website;;;;;;
+"Francesco Valletta,
+Itamar Dag,
+Leore Grosman";Identifying Local Learning Communities During the Terminal Palaeolithic in the Southern Levant: Multi-scale 3-D Analysis of Flint Cores;Research Article;https://doi.org/10.5334/jcaa.74;MATLAB;https://github.com/itamardag/CoreAnalysisToolbox;script;research software;comments;little;2021;journal website;y;n;;y;no;no
+"Maria Elena Castiello,
+Marj Tonini";An Explorative Application of Random Forest Algorithm for Archaeological Predictive Modeling. A Swiss Case Study;Research Article;https://doi.org/10.5334/jcaa.71;R Code;no;;;;;;journal website;;;;;;
+"Nicholas Arnold,
+Plamen Angelov,
+Tim Viney,
+Peter Atkinson";Automatic Extraction and Labelling of Memorial Objects From 3D Point Clouds;Research Article;https://doi.org/10.5334/jcaa.66;Python;no;;;;;2021;journal website;;;;;;
+"Marta Lorenzon,
+Cansu Pylkännen,
+Andreas V. Artto";Architecture Reality and Perception: The Multicultural Nature of Egyptian Domestic Architecture in the Roman Period;Case Study;https://doi.org/10.5334/jcaa.95;no;no;;;;;2023;journal website;;;;;;
+"Stacey Middleton,
+Rebecca Phillipps";Experimental Improvements to the Volume Ratio and Quantifying Movement Using Stone Artefact Analysis;Research Article;https://doi.org/10.5334/jcaa.93;R Code;no;;;;;2022;journal website;;;;;;
+"Abigail Desmond,
+Ian Cartwright,
+Richard Allen";Documenting Functional Use-Wear on Bone Tools: An RTI Approach;Research Article;https://doi.org/10.5334/jcaa.80;no;no;;;;;2021;journal website;;;;;;
+"Dan Trepal,
+Don Lafreniere,
+Timothy Stone";Mapping Historical Archaeology and Industrial Heritage: The Historical Spatial Data Infrastructure;Case Study;https://doi.org/10.5334/jcaa.77;no;no;;;;;2021;journal website;;;;;;
+Samuel Andrew Hardy;It Is Not against the Law, if No-One Can See You: Online Social Organisation of Artefact-Hunting in Former Yugoslavia;Research Article;https://doi.org/10.5334/jcaa.76;?;no;;;;;2021;journal website;;;;;;
+"Alexandre Guyot,
+Marc Lennon,
+Thierry Lorho,
+Laurence Hubert-Moy";Combined Detection and Segmentation of Archeological Structures from LiDAR Data Using a Deep Learning Approach;Research Article;https://doi.org/10.5334/jcaa.64;Python?;no;;;;;2021;journal website;;;;;;
+"Jose Iriarte,
+Mark Robinson,
+Jonas de Souza,
+Antonia Damasceno,
+Franciele da Silva,
+Francisco Nakahara,
+Alceu Ranzi,
+Luiz Aragao";Geometry by Design: Contribution of Lidar to the Understanding of Settlement Patterns of the Mound Villages in SW Amazonia;Case Study;https://doi.org/10.5334/jcaa.45;no;no;;;;;2020;journal website;;;;;;
+"Juan C. Fernandez-Diaz,
+Anna S. Cohen";Whose Data Is It Anyway? Lessons in Data Management and Sharing from Resurrecting and Repurposing Lidar Data for Archaeology Research in Honduras;Case Study;https://doi.org/10.5334/jcaa.51;no;no;;;;;2020;journal website;;;;;;
+"Michael Doneus,
+Gottfried Mandlburger,
+Nives Doneus";Archaeological Ground Point Filtering of Airborne Laser Scan Derived Point-Clouds in a Difficult Mediterranean Environment;Research Article;https://doi.org/10.5334/jcaa.44;no? SCOP++ ;no;;;;;2020;journal website;;;;;;
+"Sean Field,
+Carrie Heitman,
+Heather Richards-Rissetto";A Least Cost Analysis: Correlative Modeling of the Chaco Regional Road System;Case Study;https://doi.org/10.5334/jcaa.36;no, ArcGIS;;;;;;2019;journal website;;;;;;
+"Samantha Thi Porter, 
+Morgan Roussel,
+Marie Soressi";A Comparison of Châtelperronian and Protoaurignacian Core Technology Using Data Derived from 3D Models;Case Study;https://doi.org/10.5334/jcaa.17;no, ChainCoder;;;;;;2019;journal website;;;;;;
+"Wouter Baernd Verschoof-van der Vaart,
+Karsten Lambers";Learning to Look at LiDAR: The Use of R-CNN in the Automated Detection of Archaeological Objects in LiDAR Data from the Netherlands;Research Article;https://doi.org/10.5334/jcaa.32;Python?;No, but teasered;;;;;2019;journal website;;;;;;
+"Alex Brandsen,
+Karsten Lambers,
+Suzan Verberne,
+Milco Wansleeben";User Requirement Solicitation for an Information Retrieval System Applied to Dutch Grey Literature in the Archaeology Domain;Research Article;https://doi.org/10.5334/jcaa.33;yes;No, but teasered;;;;;2019;journal website;;;;;;
+Tutku Tuncali Yaman;A Model-Based Statistical Classification Analysis for Karamattepe Arrowheads;Research Article;https://doi.org/10.5334/jcaa.20;SPSS 24;printed;script;article reproducibility;none;little;2019;journal website;;y;y;y;no;no
+Willem Vletter;First Steps in the Use of a Game Engine for Historical Roads and Paths Research;Research Article;https://doi.org/10.5334/jcaa.18;Java, C#, Booh;no;;;;;2019;journal website;;;;;;
+Kenneth Kvamme;Getting Around the Black Box: Teaching (Geophysical) Data Processing through GIS;Research Article;https://doi.org/10.5334/jcaa.14;no;no;;;;;2018;journal website;;;;;;
+"Rebecca J.S. Cannell,
+Lars Gustavsen,
+Monica Kristiansen,
+Erich Nau";Delineating an Unmarked Graveyard by High-Resolution GPR and pXRF Prospection: The Medieval Church Site of Furulund in Norway;Research Article;https://doi.org/10.5334/jcaa.9;no, ArcGIS;no;;;;;2018;journal website;;;;;;
