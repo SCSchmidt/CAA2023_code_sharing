@@ -317,11 +317,11 @@ Length of documentation seems to grow -> mostly READMEs or Manuals -> sign of pe
 ### Metadata
 
 ```{r}
-
 #| label: fig-metadata
-#| fig-cap: "metadata of software"
+#| fig-cap: "metadata availability of software"
 #| warning: false
-## metadata: ordered factor
+
+## metadata as ordered factor
 
 d1$metadata <- factor(d1$metadata, ordered = T,
                       levels = c("no", "little", "some", "plenty"))
@@ -355,7 +355,8 @@ ggsave("./figures/metadata_per_year2.jpg", dpi = 300, width = 8, height = 4)
 ```
 
 Importance of metadata seems to grow.
-Little metadata gets "automatically" assigned in DOI-giving repositories (zenodo and osf), as well as some basics in Github: e.g. author, programming language. More elaborate metadata can be uploaded eg for Github Collections via https://collectionbuilder.github.io/cb-docs/docs/metadata/uploading/, or with a DESCRIPTION file or similar in zenodo and OSF using the structured questionnaires
+Little metadata gets "automatically" assigned in DOI-giving repositories (zenodo and osf), as well as some basics in Github: e.g. author, programming language. More elaborate metadata can be uploaded eg for Github Collections via https://collectionbuilder.github.io/cb-docs/docs/metadata/uploading/, or with a DESCRIPTION file or similar in zenodo and OSF using the structured questionnaires.
+
 Adding more metadata (such as keywords, etc) is done consciously.
 
 ```{r}
@@ -370,217 +371,4 @@ kable(table(d3$repo, d3$metadata))
 ```
 
 Table shows: Zenodo is linked to most metadata (partly only indirectly via Github -> people who care about making research reproducible by giving DOIs also add some more metadata)
-
-## analysis excluded from paper
-
-### Persistent identifiers
-
-```{r}
-#| label: fig-pid
-#| fig-cap: "Use of persistent identifiers for code in JCAA articles"
-#| warning: false
-
-library(ggplot2)
-
-library(viridis)
-
-ggplot()+
-  geom_line(data = jcaa1,
-            aes(x = Year,
-                y = Frequency))+
-  geom_bar(data = d1, aes(x = year,
-               fill = pid))+
-  xlab("Year of publication")+
-  ylab("Number of publications")+
-  scale_x_continuous(breaks = 2018:2023,
-                   labels = c("2018", "2019", "2020", "2021", "2022", "2023 \n(until August)"))+
-  scale_fill_viridis(discrete = TRUE,
-                      name="Persistent identifiers \nfor published code") + 
-  annotate(geom = "text",
-    label = "total number of articles per year\n in JCAA",
-           x = 2021.5,
-           y = 19 )+
-  theme_bw()
-
-ggsave("./figures/PIDs_per_year.jpg", dpi = 300, width = 8, height = 4)
-
-```
--> already covered in "where is published"
-
-
-### "aim" of software
-```{r}
-#| label: fig-aims
-#| fig-cap: "Aim of the software over time"
-#| warning: false
-
-d1 |>
-  ggplot()+
-  geom_bar(aes(x = year,
-               fill = aim))+
-  geom_line(data = jcaa1,
-            aes(x = Year,
-                y = Frequency))+
-    scale_x_continuous(breaks = 2018:2023,
-                   labels = c("2018", "2019", "2020", "2021", "2022", "2023 \n(until August)"))+
-  scale_fill_viridis(discrete = TRUE,
-                     name = "Reason of publishing the code")+
-    annotate(geom = "text",
-    label = "total number of articles per year\n in JCAA",
-           x = 2022,
-           y = 19 )+
-  theme_bw()
-
-ggsave("./figures/aims_per_year.jpg", dpi = 300, width = 8, height = 4)
-
-
-```
-Seems to be a more or less consistent percentage of research software development in relation to article reproducibility
-1 NA is due to DOI not resolving anymore. 
-Maybe a bit difficult to assign aims the authors may have intended, therefore excluded from paper. 
-
-
-### Kind of software
-
-```{r}
-#| label: fig-as
-#| fig-cap: "Format of software"
-#| warning: false
-
-d1 |>
-  ggplot()+
-  geom_bar(aes(x = as.numeric(year),
-               fill = as))+
-  geom_line(data = jcaa1,
-            aes(x = as.numeric(Year),
-                y = Frequency))+
-  theme_bw()
-```
-Most are compendiums and scripts, more rarely complete packages (extensions of software) or stand-alone software.
-
---> different than archaeo-info
-
-
-
-### Github and PIDs
-```{r}
-#| label: fig-gh
-#| fig-cap: "documentation of software, length and year"
-#| warning: false
- 
-d1$doc_length <- factor(d1$doc_length, ordered = T,
-                        levels = c("little", "some", "good"))
-d1 |>
-ggplot()+
-  geom_jitter(aes(x = year,
-                 y = doc_length,
-                 col = gh,
-                 shape = pid),
-              width = 0.2, 
-              height = 0.2,
-              alpha = 0.9)+
-  labs(y = "length of documentation")+
-   annotate(geom="text",
-           x = 2019, 
-           y = 4.5, 
-           label="points jittered by 20% to reduce overlap",
-           size = 3)+
-       annotate(geom="text",
-           x = 2023, 
-           y = 0.5, 
-           label="n = 21",
-           size = 3)+
-  theme_bw()
-
-```
-
-Check GH + PID, just GH or just PID
-
-```{r}
-d1 |>
-  mutate(v = 
-           case_when(
-    (gh == "y") & (pid == "y") ~ "gh and pid",
-    (gh == "y") & (pid == "n") ~ "gh",
-    (gh == "n") & (pid == "y") ~ "pid",
-     is.na(gh) & (pid == "y") ~ "pid"
-  )) |>
-  ggplot()+
-  geom_jitter(aes(x = year,
-                 y = doc_length,
-                 col = v,
-                 shape = documentation),
-              width = 0.2, 
-              height = 0.2,
-              alpha = 0.9)+
-  labs(y = "length of documentation")+
-   annotate(geom="text",
-           x = 2019, 
-           y = 4.5, 
-           label="points jittered by 20% to reduce overlap",
-           size = 3)+
-       annotate(geom="text",
-           x = 2023, 
-           y = 0.5, 
-           label="n = 21",
-           size = 3)+
-  theme_bw()
-
-
-```
-READMEs not restricted to github -> though maybe more extensive there?
-
-
-```{r}
-#| label: fig-doc
-#| fig-cap: "documentation of software"
-#| warning: false
-
-# documentation
-## comments = ONLY comments, README (may also contain comments) as main info and manuals as extra on top
-d1 |>
-  ggplot()+
-  geom_bar(aes(x = as.numeric(year),
-               fill = documentation))+
-  geom_line(data = jcaa1,
-            aes(x = as.numeric(Year),
-                y = Frequency))+
-  theme_bw()
-
-```
-### Github and Zenodo and Metadata
-
-```{r}
-#| label: GH_zenodo_JCAA
-table(d2$gh, d2$repo)
-```
-
-```{r}
-
-#| label: GH_zenodo_oarch
-#| echo: false
-#| eval: false
-
-oarch6 <- oarch |>
-  mutate(pid = case_when(
-    !is.na(DOI) ~ "y",
-    TRUE ~ "n"
-  ),
-  gh = case_when(
-      !is.na(github) ~ "y",
-    TRUE ~ "n"  
-  ))
-
-table(oarch6$gh, oarch6$pid)
-
-
-
-oarch_zenodo <- oarch |>
-  filter(!is.na(github)) |>
-  mutate(zenodo = case_when(
-    str_detect(DOI, "zenodo") ~ "y",
-    TRUE ~ "n"
-  )) 
-
-```
 
