@@ -250,7 +250,7 @@ ggplot()+
 ggsave("./figures/repo_for_pid_per_year_all_b.jpg", dpi = 300, width = 10, height = 4)
   
 ```
--> shows consistent preference of zenodo
+Graph shows consistent preference of zenodo.
 
 The black line denotes the number of JCAA articles all in all. Added because this has influence on nr of articles in sample.
 Peak at 2020 is probably related to the drop-off because of covid pandemic.
@@ -309,7 +309,7 @@ ggsave("./figures/doc_length_kind_per_year_narm2.jpg", dpi = 300, width = 10, he
 ```
 Most of the time a README is the most elaborate description of the code (= comments + README).
 
-Length of documentation seems to grow -> mostly READMEs or Manuals -> sign of people thinking more about re-use of code?
+Length of documentation seems to grow, number of publications with only comments decreases over time. This could be a sign of people thinking more about the re-use of code.
 
 
 
@@ -369,5 +369,5 @@ d3$repo[is.na(d3$repo)] <- "no PID"
 kable(table(d3$repo, d3$metadata))
 ```
 
-Table shows: Zenodo is linked to most metadata (partly only indirectly via Github -> people who care about making research reproducible by giving DOIs also add some more metadata)
+Table shows: Zenodo is linked to most metadata (partly only indirectly via Github, shows people who care about making research reproducible by giving DOIs also add some more metadata)
 

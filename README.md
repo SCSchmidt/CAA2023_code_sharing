@@ -1,5 +1,5 @@
 # CAA2023_code_sharing
-This Rproject offers data and code of the analysis of code sharing in archaeology presented at the CAA 2023 and in process of being published in the proceedings.
+This Rproject offers data and code of the analysis of code sharing in archaeology presented at the CAA 2023 and in process of being published in the proceedings. The full analysis will be found in the paper, here are only some small comments added to the analysis code. 
 
 ### Data
 Data in /data/open-archaeo-data is taken from Zack Batist and Joe Roe's https://github.com/zackbatist/caa2021-openarchaeo . Check out open-archaeos source from https://github.com/zackbatist/open-archaeo .
