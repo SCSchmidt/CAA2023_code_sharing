@@ -21,7 +21,8 @@ Analysis code and short discussion can be found in the CAA2023_code_sharing.qmd,
 
 Please cite this compendium as:
 
-    Author, (2023). Title of compendium. Accessed ... , DOI forthcoming
+    Sophie C. Schmidt, (2023). Analysis of code sharing practices in archaeology using open-archaeo and JCAA. Accessed ... , DOI: 10.5281/zenodo.8307960 
+
 
 ### Licenses
 
