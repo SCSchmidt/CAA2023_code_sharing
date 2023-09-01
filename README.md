@@ -1,3 +1,8 @@
+
+
+[![DOI](https://zenodo.org/badge/684052443.svg)](https://zenodo.org/badge/latestdoi/684052443)
+
+
 # CAA2023_code_sharing
 This Rproject offers data and code of the analysis of code sharing in archaeology presented at the CAA 2023 and in process of being published in the proceedings. The full analysis will be found in the paper, here are only some small comments added to the analysis code. 
 
