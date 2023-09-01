@@ -18,13 +18,10 @@ format:
 #| label: open archaeo data loading
 #| warning: FALSE
 
+# the data is provided by https://github.com/zackbatist/caa2021-openarchaeo 
 library(knitr)
 library(here)
 path <- here("analysis" ,"data", "open-archaeo-data", "oarch.RData" )
-load(path)
-
-path <- here("analysis" ,"data", "open-archaeo-data", "caa2021_oarch.RData" )
-
 load(path)
 
 library(dplyr)
@@ -51,7 +48,7 @@ pubs <- colnames(oarch[,3:16])
 
 library(tidyr)
 
-#pivot table long
+#pivot table long -> nr of observations increases (double mentions!)
 oarch5 <- oarch3 %>% pivot_longer(cols=colnames(oarch[,3:16]),
                                   names_to='publication',
                                   values_to='pub_form')
@@ -75,7 +72,8 @@ library(forcats) #for fct_infreq which oders the bars in the barplot
 
 
 oarch5 %>%
-  ggplot(aes(x = fct_infreq(publication), fill = advertisement))+
+  ggplot(aes(x = fct_infreq(publication),
+             fill = advertisement))+
   geom_bar()+
   guides(fill = "none") +
   scale_x_discrete(breaks = c("github", "website", "publication", "codeberg", "blogpost", "gist", "gitlab", "bitbucket", "DOI", "twitter", "youtube", "launchpad", "pypi", "cran"),
@@ -201,7 +199,7 @@ jcaa1$Year <- as.numeric(jcaa1$Year)
 
 
 ```{r}
-#| label: check for repos in persistend IDs
+#| label: check for repos and persistend IDs
 # data manipulation
 
 library(dplyr)
@@ -259,23 +257,9 @@ The black line denotes the number of JCAA articles all in all. Added because thi
 Peak at 2020 is probably related to the drop-off because of covid pandemic.
 Seems to be a rise in percentage of use of persistent identifiers (if 2021 is considered an outlier).
 
-```{r}
-#| label: tbl-repo_metadata
-#| tbl-cap: "Metadata and Repository"
 
-d3 <- d2
-
-d3$repo[is.na(d3$repo)] <- "no PID"
-
-kable(table(d3$repo, d3$metadata))
-```
-
-Table shows: Zenodo is linked to most metadata (maybe only indirectly via GH)
-
-Not sure: When did JCAA implement reproducibility guidelines? From the very start?
 
 ### Documentation
-Most of the time a README is the most elaborate description of the code (comments + README).
 
 ```{r}
 #| label: fig-doclength
@@ -324,6 +308,7 @@ ggplot()+
 ggsave("./figures/doc_length_kind_per_year_narm2.jpg", dpi = 300, width = 10, height = 4)
 
 ```
+Most of the time a README is the most elaborate description of the code (= comments + README).
 
 Length of documentation seems to grow -> mostly READMEs or Manuals -> sign of people thinking more about re-use of code?
 
@@ -371,12 +356,20 @@ ggsave("./figures/metadata_per_year2.jpg", dpi = 300, width = 8, height = 4)
 
 Importance of metadata seems to grow.
 Little metadata gets "automatically" assigned in DOI-giving repositories (zenodo and osf), as well as some basics in Github: e.g. author, programming language. More elaborate metadata can be uploaded eg for Github Collections via https://collectionbuilder.github.io/cb-docs/docs/metadata/uploading/, or with a DESCRIPTION file or similar in zenodo and OSF using the structured questionnaires
-
-
 Adding more metadata (such as keywords, etc) is done consciously.
 
+```{r}
+#| label: tbl-repo_metadata
+#| tbl-cap: "Metadata and Repository"
 
--> zenodo offers most metadata.
+d3 <- d2
+
+d3$repo[is.na(d3$repo)] <- "no PID"
+
+kable(table(d3$repo, d3$metadata))
+```
+
+Table shows: Zenodo is linked to most metadata (partly only indirectly via Github -> people who care about making research reproducible by giving DOIs also add some more metadata)
 
 ## analysis excluded from paper
 
@@ -465,7 +458,7 @@ d1 |>
 ```
 Most are compendiums and scripts, more rarely complete packages (extensions of software) or stand-alone software.
 
---> doubles info from archaeo-info?
+--> different than archaeo-info
 
 
 

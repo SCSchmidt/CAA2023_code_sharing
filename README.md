@@ -10,13 +10,13 @@ JCAA_all_papers_per_year.ods has been collected from https://journal.caa-interna
 
 ### Code
 The first graph is created using code from https://github.com/zackbatist/caa2021-openarchaeo .
-Analysis code and short discussion can be found in the CAA2023_code_sharing.qmd, which should render to html and docx. 
+Analysis code and short discussion can be found in the CAA2023_code_sharing.qmd, which should render to html.
 
 ### Citation
 
 Please cite this compendium as:
 
-    Authors, (2023). Title of compendium. Accessed ... , DOI forthcoming
+    Author, (2023). Title of compendium. Accessed ... , DOI forthcoming
 
 ### Licenses
 
@@ -25,3 +25,4 @@ Please cite this compendium as:
 **Code** : See the LICENSE file
 
 **Data** : CC-0 attribution requested in reuse
+
